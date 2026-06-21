@@ -62,7 +62,8 @@
 
 <div class="ambient-bg"></div>
 
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-screen lg:h-[calc(100vh-4rem)] w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+  <!-- HEADER -->
   <div class="col-span-1 lg:col-span-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
     <h2 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">Autonomic AI Observability</h2>
     <div class="flex items-center gap-2">
@@ -73,67 +74,77 @@
     </div>
   </div>
 
-  <div class="glass-panel col-span-1 lg:col-span-12 flex flex-col sm:flex-row gap-6">
-    <div class="health-card">
-      <h3 class="flex items-center text-[0.8rem] text-[#888899] uppercase tracking-widest mb-2">
-        <Activity size={16} class="mr-1 text-[#00e5ff]" /> System CPU
-      </h3>
-      <div class="value">{health.cpu}</div>
+  <!-- LEFT SIDEBAR (4 Columns) -->
+  <div class="col-span-1 lg:col-span-4 flex flex-col gap-6 lg:h-[calc(100vh-9rem)]">
+    <!-- Health Stats -->
+    <div class="glass-panel flex flex-col sm:flex-row lg:flex-col gap-6 shrink-0">
+      <div class="health-card">
+        <h3 class="flex items-center text-[0.8rem] text-[#888899] uppercase tracking-widest mb-2">
+          <Activity size={16} class="mr-1 text-[#00e5ff]" /> System CPU
+        </h3>
+        <div class="value">{health.cpu}</div>
+      </div>
+      <div class="health-card">
+        <h3 class="flex items-center text-[0.8rem] text-[#888899] uppercase tracking-widest mb-2">
+          <Server size={16} class="mr-1 text-[#b300ff]" /> Memory Usage
+        </h3>
+        <div class="value">{health.mem}</div>
+      </div>
     </div>
-    <div class="health-card">
-      <h3 class="flex items-center text-[0.8rem] text-[#888899] uppercase tracking-widest mb-2">
-        <Server size={16} class="mr-1 text-[#b300ff]" /> Memory Usage
-      </h3>
-      <div class="value">{health.mem}</div>
-    </div>
-  </div>
 
-  <div class="glass-panel col-span-1 lg:col-span-4 flex flex-col min-h-[300px] lg:h-full lg:overflow-hidden">
-    <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
-      <GitMerge size={20} class="text-[#00ff9d]" /> DAG Workflows
-    </h3>
-    <div class="flex-1 overflow-y-auto pr-1">
-      {#if workflows.length === 0}
-        <p class="text-[#888899] text-sm">Waiting for spine events...</p>
-      {:else}
-        {#each workflows as w, i}
-          <div class={`dag-node ${i === 0 ? 'active' : ''}`}>
-            <span>{w.id}</span>
-            <span class="w-2 h-2 rounded-full bg-[#00ff9d] shadow-[0_0_12px_#00ff9d]"></span>
-          </div>
-        {/each}
-      {/if}
-    </div>
-  </div>
-
-  <div class="glass-panel col-span-1 lg:col-span-8 flex flex-col min-h-[400px] lg:h-full lg:overflow-hidden">
-    <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
-      <TermIcon size={20} class="text-[#00e5ff]" /> Sandbox Execution
-    </h3>
-    <div class="terminal-output flex-1 relative overflow-y-auto">
-      <div class="absolute inset-0">
-        {#each logs as log}
-          <div class="terminal-line">
-            <span class="prefix">&gt;</span> {log}
-          </div>
-        {/each}
-        <div bind:this={logsEndRef}></div>
+    <!-- DAG Workflows -->
+    <div class="glass-panel flex-1 flex flex-col min-h-[300px] overflow-hidden">
+      <h3 class="flex items-center gap-2 text-lg font-semibold mb-4 shrink-0">
+        <GitMerge size={20} class="text-[#00ff9d]" /> DAG Workflows
+      </h3>
+      <div class="flex-1 overflow-y-auto pr-1">
+        {#if workflows.length === 0}
+          <p class="text-[#888899] text-sm">Waiting for spine events...</p>
+        {:else}
+          {#each workflows as w, i}
+            <div class={`dag-node ${i === 0 ? 'active' : ''}`}>
+              <span>{w.id}</span>
+              <span class="w-2 h-2 rounded-full bg-[#00ff9d] shadow-[0_0_12px_#00ff9d]"></span>
+            </div>
+          {/each}
+        {/if}
       </div>
     </div>
   </div>
 
-  <div class="glass-panel col-span-1 lg:col-span-12 flex flex-col">
-    <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
-      <Brain size={20} class="text-[#b300ff]" /> Brain Context Retrieval
-    </h3>
-    <div class="mt-4 flex flex-wrap gap-2">
-      {#if context.length === 0}
-        <p class="text-[#888899] text-sm">Waiting for brain events...</p>
-      {:else}
-        {#each context as c}
-          <span class="context-item">{c}</span>
-        {/each}
-      {/if}
+  <!-- RIGHT MAIN AREA (8 Columns) -->
+  <div class="col-span-1 lg:col-span-8 flex flex-col gap-6 lg:h-[calc(100vh-9rem)]">
+    <!-- Brain Context -->
+    <div class="glass-panel flex flex-col shrink-0">
+      <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
+        <Brain size={20} class="text-[#b300ff]" /> Brain Context Retrieval
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {#if context.length === 0}
+          <p class="text-[#888899] text-sm">Waiting for brain events...</p>
+        {:else}
+          {#each context as c}
+            <span class="context-item">{c}</span>
+          {/each}
+        {/if}
+      </div>
+    </div>
+
+    <!-- Sandbox Logs -->
+    <div class="glass-panel flex-1 flex flex-col min-h-[400px] overflow-hidden">
+      <h3 class="flex items-center gap-2 text-lg font-semibold mb-4 shrink-0">
+        <TermIcon size={20} class="text-[#00e5ff]" /> Sandbox Execution
+      </h3>
+      <div class="terminal-output flex-1 relative overflow-y-auto">
+        <div class="absolute inset-0">
+          {#each logs as log}
+            <div class="terminal-line">
+              <span class="prefix">&gt;</span> {log}
+            </div>
+          {/each}
+          <div bind:this={logsEndRef}></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
