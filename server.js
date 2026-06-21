@@ -4,8 +4,9 @@ import { WebSocketServer } from "ws";
 const sc = StringCodec();
 
 async function start() {
-  console.log("Connecting to NATS at nats://127.0.0.1:4222...");
-  const nc = await connect({ servers: "nats://127.0.0.1:4222" }).catch(() => {
+  const natsUrl = process.env.AUTONOMIC_NATS_URL || "nats://127.0.0.1:4222";
+  console.log(`Connecting to NATS at ${natsUrl}...`);
+  const nc = await connect({ servers: natsUrl }).catch(() => {
     console.warn("NATS connection failed. Running in mock mode.");
     return null;
   });
