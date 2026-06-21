@@ -62,9 +62,9 @@
 
 <div class="ambient-bg"></div>
 
-<div class="grid grid-cols-12 gap-6 h-[calc(100%-4rem)]">
-  <div class="col-span-12 flex justify-between items-center">
-    <h2 class="text-3xl font-bold bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">Autonomic AI Observability</h2>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-screen lg:h-[calc(100vh-4rem)] w-full">
+  <div class="col-span-1 lg:col-span-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h2 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">Autonomic AI Observability</h2>
     <div class="flex items-center gap-2">
       <div class={`w-2.5 h-2.5 rounded-full shadow-[0_0_12px] ${connected ? 'bg-[#00ff9d] shadow-[#00ff9d]' : 'bg-[#ff0055] shadow-[#ff0055]'}`}></div>
       <span class="text-sm text-[#888899] uppercase tracking-widest font-semibold">
@@ -73,7 +73,7 @@
     </div>
   </div>
 
-  <div class="glass-panel col-span-12 flex gap-6">
+  <div class="glass-panel col-span-1 lg:col-span-12 flex flex-col sm:flex-row gap-6">
     <div class="health-card">
       <h3 class="flex items-center text-[0.8rem] text-[#888899] uppercase tracking-widest mb-2">
         <Activity size={16} class="mr-1 text-[#00e5ff]" /> System CPU
@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <div class="glass-panel col-span-4 flex flex-col">
+  <div class="glass-panel col-span-1 lg:col-span-4 flex flex-col min-h-[300px] lg:h-full lg:overflow-hidden">
     <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
       <GitMerge size={20} class="text-[#00ff9d]" /> DAG Workflows
     </h3>
@@ -106,21 +106,23 @@
     </div>
   </div>
 
-  <div class="glass-panel col-span-8 flex flex-col">
+  <div class="glass-panel col-span-1 lg:col-span-8 flex flex-col min-h-[400px] lg:h-full lg:overflow-hidden">
     <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
       <TermIcon size={20} class="text-[#00e5ff]" /> Sandbox Execution
     </h3>
-    <div class="terminal-output flex-1">
-      {#each logs as log}
-        <div class="terminal-line">
-          <span class="prefix">&gt;</span> {log}
-        </div>
-      {/each}
-      <div bind:this={logsEndRef}></div>
+    <div class="terminal-output flex-1 relative overflow-y-auto">
+      <div class="absolute inset-0">
+        {#each logs as log}
+          <div class="terminal-line">
+            <span class="prefix">&gt;</span> {log}
+          </div>
+        {/each}
+        <div bind:this={logsEndRef}></div>
+      </div>
     </div>
   </div>
 
-  <div class="glass-panel col-span-12 flex flex-col">
+  <div class="glass-panel col-span-1 lg:col-span-12 flex flex-col">
     <h3 class="flex items-center gap-2 text-lg font-semibold mb-4">
       <Brain size={20} class="text-[#b300ff]" /> Brain Context Retrieval
     </h3>
