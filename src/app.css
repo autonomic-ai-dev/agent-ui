@@ -58,11 +58,11 @@ body {
 
 #root, .app-container {
   width: 100%;
-  padding: 2rem;
+  padding: 1.5rem;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1, h2, h3 {
