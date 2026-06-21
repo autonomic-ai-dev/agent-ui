@@ -12,11 +12,11 @@
     mem: string;
   }
 
-  let connected = false;
-  let logs: string[] = [];
-  let workflows: { id: string; status: string }[] = [];
-  let context: string[] = [];
-  let health: OrganHealth = { cpu: '0%', mem: '0MB' };
+  let connected = $state(false);
+  let logs: string[] = $state([]);
+  let workflows: { id: string; status: string }[] = $state([]);
+  let context: string[] = $state([]);
+  let health: OrganHealth = $state({ cpu: '0%', mem: '0MB' });
   
   let logsEndRef: HTMLDivElement;
 
