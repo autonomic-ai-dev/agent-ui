@@ -10,9 +10,9 @@
   color: rgba(255, 255, 255, 0.9);
   
   --bg-dark: #050505;
-  --glass-bg: rgba(10, 10, 12, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.04);
-  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(10, 10, 12, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-highlight: rgba(255, 255, 255, 0.25);
   
   --cyber-blue: #00e5ff;
   --cyber-purple: #b300ff;
